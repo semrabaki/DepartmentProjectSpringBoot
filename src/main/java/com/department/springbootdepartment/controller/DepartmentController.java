@@ -23,8 +23,8 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     //@RequestMapping(value = "/departments", method = RequestMethod.POST)
-    @PostMapping("/departments")
-    public Department saveDepartment(@RequestBody Department department){
+    @PostMapping("/departments")//save yapmak icin post kullanilir
+    public Department saveDepartment(@RequestBody Department department){ //nesneyi body ksiminda gonder demek
 
         return departmentService.saveDepartment(department);
     }
@@ -43,5 +43,15 @@ public class DepartmentController {
     public String deleteDepartmentById(@PathVariable("id") Long departmentId){
         departmentService.deletedDepartmentById(departmentId);
         return "Deleted successfully";
+    }
+
+    @PutMapping("departments/{id}")
+    public Department updateDepartment(@PathVariable("id") Long departmentId, @RequestBody Department department){
+        return  departmentService.updateDepartment(departmentId, department);
+    }
+
+    @GetMapping("/departments/name/{name}")
+    public Department fetchDepartmentByName(@PathVariable("name") String departmentName){
+        return departmentService.fetchDepartmentByName(departmentName);
     }
 }
